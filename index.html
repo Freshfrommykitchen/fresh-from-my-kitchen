@@ -643,6 +643,7 @@
 // https://docs.google.com/spreadsheets/d/1ABC123XYZ.../edit
 // then SHEET_ID = "1ABC123XYZ..."
 const SHEET_ID = "1_ptMlMLoAOX68mLhxSKMaRDPeqxKfo-4kYrrDLjU7ek";
+const PUB_ID = "2PACX-1vQkhwUPjT9fNc3gKnSYZSgaIbSfh17iMAmmSDTvGkK5epvZ5PmxZQX95gVyhgp1K-gNyE_t2vQ8bHMo";
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 // Sheet tab names (must match exactly)
@@ -681,21 +682,26 @@ function getTag(row) {
   return ["Veg", "tag-veg"];
 }
 
-// Fetch a sheet tab as CSV
+// Fetch using published-to-web CSV URL (most reliable, no CORS issues)
 async function fetchSheet(tabName) {
-  if (SHEET_ID === "YOUR_SHEET_ID_HERE") return null;
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tabName)}`;
+  // Uses the "Publish to web" CSV URL — works from any browser without CORS issues
+  const url = `https://docs.google.com/spreadsheets/d/e/${PUB_ID}/pub?output=csv&sheet=${encodeURIComponent(tabName)}`;
+  console.log('Fetching:', tabName, url);
   try {
     const res = await fetch(url);
-    if (!res.ok) return null;
+    if (!res.ok) {
+      console.error('HTTP error', res.status, 'for', tabName);
+      return null;
+    }
     const text = await res.text();
+    console.log('Got', text.length, 'chars for', tabName, '— first 100:', text.substring(0, 100));
     return parseCSV(text);
   } catch(e) {
+    console.error('Fetch failed for', tabName, e.message);
     return null;
   }
 }
 
-// Simple CSV parser
 function parseCSV(text) {
   const rows = [];
   const lines = text.split('\n');
@@ -704,7 +710,9 @@ function parseCSV(text) {
     const cols = [];
     let cur = '', inQ = false;
     for (let i = 0; i < line.length; i++) {
-      if (line[i] === '"') { inQ = !inQ; continue; }
+      if (line[i] === '"' && !inQ) { inQ = true; continue; }
+      if (line[i] === '"' && inQ && line[i+1] === '"') { cur += '"'; i++; continue; }
+      if (line[i] === '"' && inQ) { inQ = false; continue; }
       if (line[i] === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
       else cur += line[i];
     }
@@ -722,7 +730,7 @@ async function loadAllDay() {
   if (!rows || rows.length <= 1) {
     if (loadEl) loadEl.innerHTML = SHEET_ID === "YOUR_SHEET_ID_HERE"
       ? '⚠️ Add your Google Sheet ID to the HTML file to load live menu data.'
-      : '⚠️ Could not load menu. Make sure your sheet is shared publicly.';
+      : '⚠️ Could not load menu data. Check browser console (F12) for details. Make sure the sheet is shared as Anyone with the link → Viewer.';
     return;
   }
   if (loadEl) loadEl.remove();
