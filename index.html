@@ -7,432 +7,168 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  /* ── DESIGN TOKENS ── */
   :root {
-    --brown: #2C1A0E;
-    --brown-mid: #3d2410;
-    --gold: #C9973A;
-    --gold-light: #E8B96A;
-    --cream: #FDF6E3;
-    --cream-mid: #FEF9ED;
+    --brown: #2C1A0E; --brown-mid: #3d2410;
+    --gold: #C9973A; --gold-light: #E8B96A;
+    --cream: #FDF6E3; --cream-mid: #FEF9ED;
     --terra: #C0552A;
-    --text-dark: #1E1208;
-    --text-mid: #6B4226;
-    --text-soft: #8B6040;
+    --text-dark: #1E1208; --text-mid: #6B4226; --text-soft: #8B6040;
     --green: #3D5A40;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--text-dark);
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ── */
-  nav {
-    background: var(--brown);
-    position: sticky; top: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 32px;
-    border-bottom: 1px solid rgba(201,151,58,.2);
-  }
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    color: var(--gold-light);
-    font-size: 20px;
-    letter-spacing: .02em;
-  }
+  /* NAV */
+  nav { background: var(--brown); position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 14px 32px; border-bottom: 1px solid rgba(201,151,58,.2); }
+  .nav-logo { font-family: 'Playfair Display', serif; color: var(--gold-light); font-size: 20px; letter-spacing: .02em; }
   .nav-links { display: flex; gap: 24px; align-items: center; }
-  .nav-links a {
-    color: rgba(253,246,227,.55);
-    font-size: 13px; font-weight: 500;
-    text-decoration: none; letter-spacing: .08em;
-    text-transform: uppercase;
-    transition: color .2s;
-  }
+  .nav-links a { color: rgba(253,246,227,.55); font-size: 13px; font-weight: 500; text-decoration: none; letter-spacing: .08em; text-transform: uppercase; transition: color .2s; }
   .nav-links a:hover { color: var(--gold-light); }
-  .nav-cta {
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    color: var(--brown) !important;
-    font-weight: 600 !important;
-    padding: 8px 18px;
-    border-radius: 3px;
-  }
-  @media (max-width: 600px) {
-    nav { padding: 12px 18px; }
-    .nav-links a:not(.nav-cta) { display: none; }
-  }
+  .nav-cta { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--brown) !important; font-weight: 600 !important; padding: 8px 18px; border-radius: 3px; }
+  @media (max-width: 600px) { nav { padding: 12px 18px; } .nav-links a:not(.nav-cta) { display: none; } }
 
-  /* ── HERO ── */
-  .hero {
-    background: linear-gradient(135deg, #fdf6e3 0%, #fef9ed 50%, #fdf0d8 100%);
-    padding: 72px 32px 64px;
-    position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; top: -60px; right: -60px;
-    width: 320px; height: 320px;
-    background: radial-gradient(circle, rgba(201,151,58,.12) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-  .hero::after {
-    content: '';
-    position: absolute; bottom: -80px; left: -80px;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(192,85,42,.06) 0%, transparent 70%);
-    border-radius: 50%;
-  }
+  /* HERO */
+  .hero { background: linear-gradient(135deg, #fdf6e3 0%, #fef9ed 50%, #fdf0d8 100%); padding: 72px 32px 64px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 320px; height: 320px; background: radial-gradient(circle, rgba(201,151,58,.12) 0%, transparent 70%); border-radius: 50%; }
+  .hero::after { content: ''; position: absolute; bottom: -80px; left: -80px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(192,85,42,.06) 0%, transparent 70%); border-radius: 50%; }
   .hero-inner { max-width: 640px; position: relative; z-index: 1; }
-  .hero-eyebrow {
-    display: inline-block;
-    background: rgba(201,151,58,.12);
-    border: 1px solid rgba(201,151,58,.35);
-    color: var(--brown);
-    font-size: 11px; font-weight: 600;
-    letter-spacing: .18em; text-transform: uppercase;
-    padding: 5px 12px; border-radius: 2px;
-    margin-bottom: 20px;
-  }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(42px, 8vw, 68px);
-    line-height: 1.05;
-    color: var(--text-dark);
-    margin-bottom: 8px;
-  }
+  .hero-eyebrow { display: inline-block; background: rgba(201,151,58,.12); border: 1px solid rgba(201,151,58,.35); color: var(--brown); font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; padding: 5px 12px; border-radius: 2px; margin-bottom: 20px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(42px, 8vw, 68px); line-height: 1.05; color: var(--text-dark); margin-bottom: 8px; }
   .hero h1 em { color: var(--terra); font-style: italic; }
-  .hero-loc {
-    font-size: 11px; color: var(--text-mid);
-    text-transform: uppercase; letter-spacing: .12em;
-    margin-bottom: 16px;
-  }
-  .hero-sub {
-    font-size: 16px; color: var(--text-soft);
-    line-height: 1.7; max-width: 440px;
-    margin-bottom: 28px;
-    font-weight: 300;
-  }
+  .hero-loc { font-size: 11px; color: var(--text-mid); text-transform: uppercase; letter-spacing: .12em; margin-bottom: 16px; }
+  .hero-sub { font-size: 16px; color: var(--text-soft); line-height: 1.7; max-width: 440px; margin-bottom: 28px; font-weight: 300; }
   .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
-  .btn-gold {
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    color: var(--brown);
-    font-size: 13px; font-weight: 700;
-    padding: 13px 28px; border-radius: 3px;
-    letter-spacing: .1em; text-transform: uppercase;
-    text-decoration: none; display: inline-block;
-    transition: transform .15s, box-shadow .15s;
-    box-shadow: 0 4px 16px rgba(201,151,58,.3);
-  }
+  .btn-gold { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--brown); font-size: 13px; font-weight: 700; padding: 13px 28px; border-radius: 3px; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: transform .15s, box-shadow .15s; box-shadow: 0 4px 16px rgba(201,151,58,.3); }
   .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(201,151,58,.4); }
-  .btn-wa {
-    background: #25d366;
-    color: #fff;
-    font-size: 13px; font-weight: 600;
-    padding: 13px 28px; border-radius: 3px;
-    letter-spacing: .08em; text-transform: uppercase;
-    text-decoration: none; display: inline-block;
-    transition: transform .15s;
-  }
+  .btn-wa { background: #25d366; color: #fff; font-size: 13px; font-weight: 600; padding: 13px 28px; border-radius: 3px; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; display: inline-block; transition: transform .15s; }
   .btn-wa:hover { transform: translateY(-1px); }
   .trust-row { display: flex; gap: 20px; flex-wrap: wrap; }
-  .trust-item {
-    display: flex; align-items: center; gap: 7px;
-    font-size: 12px; color: var(--text-mid); font-weight: 500;
-  }
+  .trust-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text-mid); font-weight: 500; }
   .trust-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
 
-  /* ── SECTION SHELL ── */
+  /* SECTION */
   section { padding: 64px 32px; }
-  .section-eyebrow {
-    font-size: 10px; font-weight: 700;
-    letter-spacing: .2em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 8px;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 5vw, 40px);
-    line-height: 1.1; margin-bottom: 8px;
-  }
+  .section-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 5vw, 40px); line-height: 1.1; margin-bottom: 8px; }
   .section-sub { font-size: 15px; color: var(--text-soft); font-weight: 300; line-height: 1.6; }
   .section-head { text-align: center; max-width: 540px; margin: 0 auto 40px; }
 
-  /* ── MENU SECTION ── */
+  /* MENU SECTION */
   .menu-section { background: var(--brown); }
-  .menu-section .section-eyebrow { color: var(--gold); }
   .menu-section .section-title { color: var(--cream); }
   .menu-section .section-sub { color: rgba(253,246,227,.5); }
 
   /* TABS */
-  .menu-tabs {
-    display: flex; gap: 6px; flex-wrap: wrap;
-    justify-content: center; margin-bottom: 32px;
-  }
-  .tab-btn {
-    background: transparent;
-    border: 1px solid rgba(201,151,58,.3);
-    color: rgba(253,246,227,.5);
-    font-size: 12px; font-weight: 600;
-    padding: 7px 16px; border-radius: 3px;
-    letter-spacing: .1em; text-transform: uppercase;
-    cursor: pointer; font-family: 'DM Sans', sans-serif;
-    transition: all .2s;
-  }
-  .tab-btn:hover, .tab-btn.active {
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    color: var(--brown); border-color: var(--gold);
-  }
+  .menu-tabs { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-bottom: 32px; }
+  .tab-btn { background: transparent; border: 1px solid rgba(201,151,58,.3); color: rgba(253,246,227,.5); font-size: 12px; font-weight: 600; padding: 7px 16px; border-radius: 3px; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .2s; }
+  .tab-btn:hover, .tab-btn.active { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--brown); border-color: var(--gold); }
 
-  /* MENU GRID */
-  .menu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 16px; max-width: 960px; margin: 0 auto;
-  }
-  .menu-card {
-    background: var(--cream);
-    border-radius: 6px; overflow: hidden;
-    border: 1px solid rgba(180,140,60,.15);
-    display: flex; flex-direction: column;
-    transition: transform .2s, box-shadow .2s;
-  }
+  /* SPECIALS TABLE */
+  .specials-wrap { max-width: 960px; margin: 0 auto; }
+  .specials-header { background: var(--brown-mid); border-radius: 6px 6px 0 0; padding: 10px 16px; display: flex; align-items: center; gap: 10px; border: 1px solid rgba(201,151,58,.2); border-bottom: none; }
+  .specials-header span { font-size: 13px; color: var(--gold-light); font-weight: 500; }
+  .specials-table-wrap { overflow-x: auto; border: 1px solid rgba(201,151,58,.2); border-top: none; border-radius: 0 0 6px 6px; background: var(--cream); }
+  table { width: 100%; border-collapse: collapse; min-width: 560px; }
+  th { background: rgba(201,151,58,.12); font-size: 11px; font-weight: 700; color: var(--text-dark); padding: 10px 12px; border: 1px solid rgba(180,130,40,.15); text-align: left; letter-spacing: .06em; text-transform: uppercase; }
+  td { font-size: 13px; color: var(--text-mid); padding: 10px 12px; border: 1px solid rgba(180,130,40,.1); vertical-align: middle; }
+  tr:nth-child(even) td { background: rgba(254,249,237,.5); }
+  .avail-dot { display: inline-block; width: 10px; height: 10px; background: var(--green); border-radius: 50%; }
+
+  /* MENU CARDS */
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; max-width: 960px; margin: 0 auto; }
+  .menu-card { background: var(--cream); border-radius: 6px; overflow: hidden; border: 1px solid rgba(180,140,60,.15); display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
   .menu-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,.15); }
-  .menu-card-top {
-    background: linear-gradient(135deg, var(--brown), var(--brown-mid));
-    padding: 14px;
-    display: flex; align-items: flex-start; justify-content: space-between;
-  }
+  .menu-card-top { background: linear-gradient(135deg, var(--brown), var(--brown-mid)); padding: 14px; display: flex; align-items: flex-start; justify-content: space-between; }
   .menu-card-emoji { font-size: 26px; }
-  .tag {
-    font-size: 9px; font-weight: 700;
-    padding: 2px 7px; border-radius: 2px;
-    letter-spacing: .08em; text-transform: uppercase;
-  }
-  .tag-veg { background: rgba(61,90,64,.4); color: #a8d4aa; border: 1px solid rgba(61,90,64,.5); }
-  .tag-pop { background: rgba(201,151,58,.25); color: var(--gold-light); border: 1px solid rgba(201,151,58,.4); }
-  .tag-spicy { background: rgba(192,85,42,.25); color: #f0a070; border: 1px solid rgba(192,85,42,.4); }
+  .tag { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 2px; letter-spacing: .08em; text-transform: uppercase; }
+  .tag-anytime { background: rgba(61,90,64,.4); color: #a8d4aa; border: 1px solid rgba(61,90,64,.5); }
+  .tag-sweet { background: rgba(201,151,58,.25); color: var(--gold-light); border: 1px solid rgba(201,151,58,.4); }
   .menu-card-body { padding: 12px 14px; flex: 1; }
   .menu-card-name { font-size: 15px; font-weight: 600; color: var(--text-dark); margin-bottom: 4px; }
   .menu-card-desc { font-size: 12px; color: var(--text-soft); line-height: 1.5; margin-bottom: 10px; font-weight: 300; }
-  .menu-card-footer {
-    display: flex; align-items: center; justify-content: space-between;
-    border-top: 1px solid rgba(180,130,40,.12); padding-top: 10px;
-  }
-  .menu-price { font-size: 17px; font-weight: 700; color: var(--text-dark); }
-  .menu-add {
-    background: linear-gradient(135deg, var(--brown), var(--brown-mid));
-    color: var(--gold-light);
-    font-size: 10px; font-weight: 700;
-    padding: 6px 12px; border-radius: 2px;
-    border: none; cursor: pointer;
-    letter-spacing: .1em; text-transform: uppercase;
-    font-family: 'DM Sans', sans-serif;
-    text-decoration: none; display: inline-block;
-  }
+  .menu-card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(180,130,40,.12); padding-top: 10px; }
+  .menu-price { font-size: 15px; font-weight: 700; color: var(--text-dark); }
+  .menu-add { background: linear-gradient(135deg, var(--brown), var(--brown-mid)); color: var(--gold-light); font-size: 10px; font-weight: 700; padding: 6px 12px; border-radius: 2px; border: none; cursor: pointer; letter-spacing: .1em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; text-decoration: none; display: inline-block; }
 
-  /* DAILY SPECIALS TABLE */
-  .specials-wrap { max-width: 960px; margin: 0 auto; }
-  .specials-header {
-    background: var(--brown-mid);
-    border-radius: 6px 6px 0 0;
-    padding: 10px 16px;
-    display: flex; align-items: center; gap: 10px;
-    border: 1px solid rgba(201,151,58,.2);
-    border-bottom: none;
-  }
-  .specials-header span { font-size: 13px; color: var(--gold-light); font-weight: 500; }
-  .live-badge {
-    background: rgba(201,151,58,.2);
-    border: 1px solid rgba(201,151,58,.4);
-    color: var(--gold); font-size: 9px;
-    padding: 2px 7px; border-radius: 2px;
-    letter-spacing: .08em; font-weight: 600;
-  }
-  .specials-table-wrap {
-    overflow-x: auto;
-    border: 1px solid rgba(201,151,58,.2);
-    border-top: none; border-radius: 0 0 6px 6px;
-    background: var(--cream);
-  }
-  table { width: 100%; border-collapse: collapse; min-width: 500px; }
-  th {
-    background: rgba(201,151,58,.12);
-    font-size: 11px; font-weight: 700;
-    color: var(--text-dark); padding: 10px 12px;
-    border: 1px solid rgba(180,130,40,.15); text-align: left;
-    letter-spacing: .06em; text-transform: uppercase;
-  }
-  td {
-    font-size: 13px; color: var(--text-mid);
-    padding: 9px 12px; border: 1px solid rgba(180,130,40,.1);
-    vertical-align: middle;
-  }
-  tr:nth-child(even) td { background: rgba(254,249,237,.5); }
-  .avail-dot { display: inline-block; width: 10px; height: 10px; background: var(--green); border-radius: 50%; }
-  #loading-msg { color: rgba(253,246,227,.5); text-align: center; padding: 32px; font-size: 14px; }
-  #loading-all { color: var(--text-soft); text-align: center; padding: 32px; font-size: 14px; }
-  #loading-sweets { color: var(--text-soft); text-align: center; padding: 32px; font-size: 14px; }
-
-  /* ── HOW IT WORKS ── */
+  /* HOW IT WORKS */
   .how-section { background: var(--cream-mid); }
-  .how-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px; max-width: 880px; margin: 0 auto;
-  }
-  .how-card {
-    background: linear-gradient(160deg, var(--cream), #fff8e7);
-    border: 1px solid rgba(180,130,40,.18);
-    border-radius: 6px; padding: 24px 20px; text-align: center;
-  }
-  .how-num {
-    width: 36px; height: 36px;
-    background: linear-gradient(135deg, var(--brown), var(--brown-mid));
-    color: var(--gold-light); border-radius: 4px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px; font-weight: 700;
-    margin: 0 auto 10px;
-  }
+  .how-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; max-width: 880px; margin: 0 auto; }
+  .how-card { background: linear-gradient(160deg, var(--cream), #fff8e7); border: 1px solid rgba(180,130,40,.18); border-radius: 6px; padding: 24px 20px; text-align: center; }
+  .how-num { width: 36px; height: 36px; background: linear-gradient(135deg, var(--brown), var(--brown-mid)); color: var(--gold-light); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; margin: 0 auto 10px; }
   .how-icon { font-size: 28px; margin-bottom: 10px; }
   .how-card h4 { font-size: 16px; font-weight: 600; color: var(--text-dark); margin-bottom: 6px; }
   .how-card p { font-size: 13px; color: var(--text-soft); line-height: 1.5; font-weight: 300; }
 
-  /* ── ORDER SECTION ── */
+  /* ORDER */
   .order-section { background: var(--cream); }
-  .order-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 40px; max-width: 900px; margin: 0 auto;
-  }
+  .order-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; margin: 0 auto; }
   @media (max-width: 700px) { .order-grid { grid-template-columns: 1fr; } }
-  .contact-block {
-    background: rgba(44,26,14,.05);
-    border: 1px solid rgba(201,151,58,.2);
-    border-radius: 6px; padding: 20px;
-    margin-top: 20px;
-  }
+  .contact-block { background: rgba(44,26,14,.05); border: 1px solid rgba(201,151,58,.2); border-radius: 6px; padding: 20px; margin-top: 20px; }
   .contact-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
   .contact-row:last-child { margin-bottom: 0; }
   .contact-icon { font-size: 18px; width: 24px; flex-shrink: 0; margin-top: 1px; }
   .contact-text strong { display: block; font-size: 14px; color: var(--text-dark); margin-bottom: 2px; }
   .contact-text span { font-size: 12px; color: var(--text-soft); }
-  .order-form {
-    background: linear-gradient(160deg, var(--cream), var(--cream-mid));
-    border: 1px solid rgba(180,140,60,.2);
-    border-radius: 6px; padding: 28px;
-  }
-  .order-form h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px; color: var(--text-dark); margin-bottom: 20px;
-  }
+  .order-form { background: linear-gradient(160deg, var(--cream), var(--cream-mid)); border: 1px solid rgba(180,140,60,.2); border-radius: 6px; padding: 28px; }
+  .order-form h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--text-dark); margin-bottom: 20px; }
   .field { margin-bottom: 14px; }
-  .field label {
-    display: block; font-size: 10px; color: var(--text-mid);
-    text-transform: uppercase; letter-spacing: .12em;
-    font-weight: 700; margin-bottom: 5px;
-  }
-  .field input, .field textarea, .field select {
-    width: 100%; padding: 10px 12px;
-    border: 1px solid rgba(180,130,40,.25);
-    border-radius: 3px; font-size: 14px;
-    color: var(--text-dark); background: rgba(253,246,227,.7);
-    font-family: 'DM Sans', sans-serif;
-    outline: none; transition: border-color .2s;
-  }
-  .field input:focus, .field textarea:focus, .field select:focus {
-    border-color: var(--gold);
-  }
+  .field label { display: block; font-size: 10px; color: var(--text-mid); text-transform: uppercase; letter-spacing: .12em; font-weight: 700; margin-bottom: 5px; }
+  .field input, .field textarea, .field select { width: 100%; padding: 10px 12px; border: 1px solid rgba(180,130,40,.25); border-radius: 3px; font-size: 14px; color: var(--text-dark); background: rgba(253,246,227,.7); font-family: 'DM Sans', sans-serif; outline: none; transition: border-color .2s; }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--gold); }
   .field textarea { height: 80px; resize: vertical; }
-  .submit-btn {
-    width: 100%; padding: 14px;
-    background: linear-gradient(135deg, var(--brown), var(--brown-mid));
-    color: var(--gold-light); border: none; border-radius: 3px;
-    font-size: 13px; font-weight: 700; letter-spacing: .14em;
-    text-transform: uppercase; cursor: pointer; margin-top: 6px;
-    font-family: 'DM Sans', sans-serif;
-    transition: transform .15s, box-shadow .15s;
-  }
+  .submit-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--brown), var(--brown-mid)); color: var(--gold-light); border: none; border-radius: 3px; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; margin-top: 6px; font-family: 'DM Sans', sans-serif; transition: transform .15s, box-shadow .15s; }
   .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(44,26,14,.25); }
 
-  /* ── TESTIMONIALS ── */
+  /* TESTIMONIALS */
   .testi-section { background: #1a1008; }
   .testi-section .section-title { color: var(--cream); }
-  .testi-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px; max-width: 960px; margin: 0 auto;
-  }
-  .testi-card {
-    background: rgba(44,26,14,.7);
-    border: 1px solid rgba(180,130,40,.18);
-    border-radius: 6px; padding: 20px;
-  }
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; max-width: 960px; margin: 0 auto; }
+  .testi-card { background: rgba(44,26,14,.7); border: 1px solid rgba(180,130,40,.18); border-radius: 6px; padding: 20px; }
   .stars { color: var(--gold); font-size: 14px; letter-spacing: 2px; margin-bottom: 10px; }
   .testi-card p { font-size: 14px; color: rgba(253,246,227,.75); line-height: 1.6; font-style: italic; margin-bottom: 14px; font-weight: 300; }
   .testi-author { display: flex; align-items: center; gap: 10px; }
-  .avatar {
-    width: 32px; height: 32px; border-radius: 3px;
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    color: var(--brown); display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700; flex-shrink: 0;
-  }
+  .avatar { width: 32px; height: 32px; border-radius: 3px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--brown); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
   .author-name { font-size: 13px; font-weight: 600; color: var(--cream); }
   .author-loc { font-size: 11px; color: rgba(253,246,227,.4); }
 
-  /* ── FOOTER ── */
-  footer {
-    background: linear-gradient(135deg, var(--brown), var(--brown-mid));
-    padding: 40px 32px; text-align: center;
-    border-top: 1px solid rgba(201,151,58,.2);
-  }
+  /* FOOTER */
+  footer { background: linear-gradient(135deg, var(--brown), var(--brown-mid)); padding: 40px 32px; text-align: center; border-top: 1px solid rgba(201,151,58,.2); }
   .footer-logo { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--gold-light); margin-bottom: 8px; }
   footer p { font-size: 13px; color: rgba(253,246,227,.5); line-height: 1.7; margin-bottom: 4px; }
   .footer-links { display: flex; gap: 20px; justify-content: center; margin: 16px 0 0; flex-wrap: wrap; }
-  .footer-links a {
-    color: rgba(253,246,227,.35); font-size: 11px;
-    letter-spacing: .12em; text-transform: uppercase;
-    text-decoration: none; transition: color .2s;
-  }
+  .footer-links a { color: rgba(253,246,227,.35); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; transition: color .2s; }
   .footer-links a:hover { color: var(--gold-light); }
 
-  /* ── SWEETS SECTION ── */
-  .sweets-section { background: var(--cream); }
+  .day-btn { background: rgba(253,246,227,.1); border: 1px solid rgba(201,151,58,.35); color: rgba(253,246,227,.6); font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 3px; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .2s; }
+  .day-btn:hover, .day-btn.active { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--brown); border-color: var(--gold); }
+  .avail-highlight { background: rgba(61,90,64,.15); }
+  .row-unavail { opacity: 0.45; }
 
-  /* ── UTILITY ── */
-  .centered { text-align: center; }
-  .mt16 { margin-top: 16px; }
-  @media (max-width: 600px) {
-    section { padding: 48px 18px; }
-    .hero { padding: 48px 18px 40px; }
-    nav { padding: 12px 18px; }
-  }
+  @media (max-width: 600px) { section { padding: 48px 18px; } .hero { padding: 48px 18px 40px; } nav { padding: 12px 18px; } }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════ NAV ═══════════════════════ -->
+<!-- NAV -->
 <nav>
   <div class="nav-logo">✦ Fresh From My Kitchen</div>
   <div class="nav-links">
     <a href="#menu">Menu</a>
     <a href="#how">How It Works</a>
-    <a href="#order" class="nav-cta">Order Now</a>
+    <a href="https://wa.me/19734491261" target="_blank" class="nav-cta">💬 WhatsApp</a>
   </div>
 </nav>
 
-<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<!-- HERO -->
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-eyebrow">✦ Homemade · No Preservatives · 100% Vegetarian</div>
     <h1>Real Food.<br/><em>Real Flavour.</em></h1>
     <div class="hero-loc">📍 Millburn, New Jersey</div>
-    <p class="hero-sub">Authentic Indian home-cooking — made fresh daily with clean ingredients. Parathas, Gujarati classics, chutneys &amp; more. <strong>Order a day in advance.</strong></p>
+    <p class="hero-sub">Authentic Indian home-cooking — made fresh daily with clean ingredients. Parathas, Gujarati classics, chutneys &amp; more. <strong>Order at least 2 days in advance.</strong></p>
     <div class="hero-btns">
-      <a href="#order" class="btn-gold">🍽 Order Now</a>
-      <a href="https://wa.me/19734491261" target="_blank" class="btn-wa">💬 WhatsApp Us</a>
+      <a href="https://wa.me/19734491261" target="_blank" class="btn-wa">💬 WhatsApp Us to Order</a>
     </div>
     <div class="trust-row">
       <div class="trust-item"><span class="trust-dot"></span>100% Vegetarian</div>
@@ -442,7 +178,7 @@
   </div>
 </div>
 
-<!-- ═══════════════════════ MENU ═══════════════════════ -->
+<!-- MENU -->
 <section class="menu-section" id="menu">
   <div class="section-head">
     <div class="section-eyebrow">Made Fresh Daily</div>
@@ -450,154 +186,91 @@
     <p class="section-sub">100% vegetarian · no preservatives · made with love</p>
   </div>
 
-  <!-- TABS -->
+  <!-- 3 TABS -->
   <div class="menu-tabs">
-    <button class="tab-btn active" onclick="showTab('alldayTab', this)">🫓 All-Day Items</button>
-    <button class="tab-btn" onclick="showTab('specialsTab', this)">📅 Daily Specials</button>
+    <button class="tab-btn active" onclick="showTab('specialsTab', this)">📅 Daily Specials</button>
+    <button class="tab-btn" onclick="showTab('chutneysTab', this)">🥣 Chutneys &amp; Condiments</button>
     <button class="tab-btn" onclick="showTab('sweetsTab', this)">🍬 Sweets &amp; Seasonal</button>
   </div>
 
-  <!-- ALL-DAY ITEMS TAB -->
-  <div id="alldayTab">
-    <div class="menu-grid" id="allday-grid">
-      <div id="loading-all" style="color:rgba(253,246,227,.5);text-align:center;padding:48px;grid-column:1/-1;">Loading menu…</div>
-    </div>
-  </div>
-
-  <!-- DAILY SPECIALS TAB -->
-  <div id="specialsTab" style="display:none">
+  <!-- DAILY SPECIALS -->
+  <div id="specialsTab">
     <div class="specials-wrap">
-      <div class="specials-header">
-        <span>📊 Daily Specials Schedule</span>
-        <span class="live-badge">Live from Google Sheets</span>
+      <div class="specials-header" style="flex-direction:column;align-items:flex-start;gap:14px">
+        <span>📅 Tap a day to see what's available — then WhatsApp to order</span>
+        <div id="day-selector" style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button class="day-btn" data-day="0">Sun</button>
+          <button class="day-btn" data-day="1">Mon</button>
+          <button class="day-btn" data-day="2">Tue</button>
+          <button class="day-btn" data-day="3">Wed</button>
+          <button class="day-btn" data-day="4">Thu</button>
+          <button class="day-btn" data-day="5">Fri</button>
+          <button class="day-btn" data-day="6">Sat</button>
+        </div>
       </div>
       <div class="specials-table-wrap">
-        <div id="loading-msg" style="padding:48px;">Loading specials…</div>
-        <table id="specials-table" style="display:none">
-          <thead id="specials-head"></thead>
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Price</th>
+              <th style="text-align:center;min-width:90px">Available</th>
+              <th style="text-align:center">Order</th>
+            </tr>
+          </thead>
           <tbody id="specials-body"></tbody>
         </table>
       </div>
+      <div id="day-order-btn-wrap" style="display:none;text-align:center;margin-top:16px">
+        <a id="day-order-btn" href="#" target="_blank" class="btn-wa" style="display:inline-block">💬 WhatsApp order for <span id="day-label-btn"></span></a>
+      </div>
     </div>
   </div>
 
-  <!-- SWEETS TAB -->
+  <!-- CHUTNEYS & CONDIMENTS -->
+  <div id="chutneysTab" style="display:none">
+    <div class="menu-grid" id="chutneys-grid"></div>
+  </div>
+
+  <!-- SWEETS & SEASONAL -->
   <div id="sweetsTab" style="display:none">
-    <div class="menu-grid" id="sweets-grid">
-      <div id="loading-sweets" style="color:rgba(253,246,227,.5);text-align:center;padding:48px;grid-column:1/-1;">Loading sweets…</div>
-    </div>
+    <div class="menu-grid" id="sweets-grid"></div>
   </div>
 </section>
 
-<!-- ═══════════════════════ HOW IT WORKS ═══════════════════════ -->
+<!-- HOW IT WORKS -->
 <section class="how-section" id="how">
-  <div class="section-head" style="color:var(--text-dark)">
+  <div class="section-head">
     <div class="section-eyebrow" style="color:var(--gold)">Simple &amp; Easy</div>
     <h2 class="section-title">How It Works</h2>
   </div>
   <div class="how-grid">
-    <div class="how-card">
-      <div class="how-num">1</div>
-      <div class="how-icon">📋</div>
-      <h4>Browse the Menu</h4>
-      <p>Explore fresh dishes &amp; scroll through our daily specials</p>
-    </div>
-    <div class="how-card">
-      <div class="how-num">2</div>
-      <div class="how-icon">💬</div>
-      <h4>Place Your Order</h4>
-      <p>Fill the form below or WhatsApp us directly</p>
-    </div>
-    <div class="how-card">
-      <div class="how-num">3</div>
-      <div class="how-icon">🍳</div>
-      <h4>We Cook Fresh</h4>
-      <p>Made the same day — no preservatives, no shortcuts</p>
-    </div>
-    <div class="how-card">
-      <div class="how-num">4</div>
-      <div class="how-icon">🚗</div>
-      <h4>Local Pickup Only</h4>
-      <p>Spring St, Millburn NJ — call before arriving</p>
-    </div>
+    <div class="how-card"><div class="how-num">1</div><div class="how-icon">📋</div><h4>Browse the Menu</h4><p>Explore fresh dishes &amp; scroll through our daily specials</p></div>
+    <div class="how-card"><div class="how-num">2</div><div class="how-icon">💬</div><h4>Place Your Order</h4><p>Fill the form below or WhatsApp us directly</p></div>
+    <div class="how-card"><div class="how-num">3</div><div class="how-icon">🍳</div><h4>We Cook Fresh</h4><p>Made the same day — no preservatives, no shortcuts</p></div>
+    <div class="how-card"><div class="how-num">4</div><div class="how-icon">🚗</div><h4>Local Pickup Only</h4><p>Spring St, Millburn NJ — call before arriving</p></div>
   </div>
 </section>
 
-<!-- ═══════════════════════ ORDER SECTION ═══════════════════════ -->
+<!-- ORDER / CONTACT -->
 <section class="order-section" id="order">
   <div class="section-head">
     <div class="section-eyebrow">Ready to Eat?</div>
     <h2 class="section-title">Place Your Order</h2>
-    <p class="section-sub">Fill the form and we'll confirm via WhatsApp</p>
+    <p class="section-sub">WhatsApp us to order — we'll confirm and cook fresh for you</p>
   </div>
-  <div class="order-grid">
-    <div>
-      <p style="font-size:15px;color:var(--text-soft);line-height:1.7;font-weight:300">
-        We cook everything fresh — please order <strong>at least one day in advance</strong> so we can prepare for you.
-      </p>
-      <div class="contact-block">
-        <div class="contact-row">
-          <div class="contact-icon">📞</div>
-          <div class="contact-text">
-            <strong>+1 (973) 449-1261</strong>
-            <span>Call or text us anytime</span>
-          </div>
-        </div>
-        <div class="contact-row">
-          <div class="contact-icon">📍</div>
-          <div class="contact-text">
-            <strong>Spring St, Millburn NJ</strong>
-            <span>Pickup only — no delivery</span>
-          </div>
-        </div>
-        <div class="contact-row">
-          <div class="contact-icon">📅</div>
-          <div class="contact-text">
-            <strong>Order 1 Day in Advance</strong>
-            <span>So everything is made fresh for you</span>
-          </div>
-        </div>
-        <div class="contact-row">
-          <div class="contact-icon">💬</div>
-          <div class="contact-text">
-            <strong><a href="https://wa.me/19734491261" target="_blank" style="color:var(--text-dark);text-decoration:none">WhatsApp Us Directly</a></strong>
-            <span>Fastest way to reach us</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="order-form">
-      <h3>📋 Order Now</h3>
-      <div class="field">
-        <label>Your Name</label>
-        <input type="text" id="fname" placeholder="Jane Smith"/>
-      </div>
-      <div class="field">
-        <label>Phone Number</label>
-        <input type="tel" id="fphone" placeholder="+1 973 000 0000"/>
-      </div>
-      <div class="field">
-        <label>Pickup Day</label>
-        <select id="fday">
-          <option value="">Select a day…</option>
-          <option>Monday</option><option>Tuesday</option><option>Wednesday</option>
-          <option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Items &amp; Quantities</label>
-        <textarea id="fitems" placeholder="e.g. 4× Paneer Paratha, 2× Mumbai Misal…"></textarea>
-      </div>
-      <div class="field">
-        <label>Special Notes</label>
-        <input type="text" id="fnotes" placeholder="Allergies, preferences…"/>
-      </div>
-      <button class="submit-btn" onclick="sendOrder()">✉ Send Order via WhatsApp</button>
+  <div style="max-width:520px;margin:0 auto;text-align:center">
+    <p style="font-size:15px;color:var(--text-soft);line-height:1.7;font-weight:300;margin-bottom:28px">We cook everything fresh — please order <strong>at least 2 days in advance</strong> so we can prepare for you.</p>
+    <a href="https://wa.me/19734491261" target="_blank" class="btn-wa" style="font-size:16px;padding:16px 40px;display:inline-block;margin-bottom:32px">💬 WhatsApp Us to Order</a>
+    <div class="contact-block" style="text-align:left">
+      <div class="contact-row"><div class="contact-icon">📞</div><div class="contact-text"><strong>+1 (973) 449-1261</strong><span>Call or text us anytime</span></div></div>
+      <div class="contact-row"><div class="contact-icon">📍</div><div class="contact-text"><strong>Spring St, Millburn NJ</strong><span>Pickup only — no delivery</span></div></div>
+      <div class="contact-row"><div class="contact-icon">📅</div><div class="contact-text"><strong>Order at Least 2 Days in Advance</strong><span>So everything is made fresh for you</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════ TESTIMONIALS ═══════════════════════ -->
+<!-- TESTIMONIALS -->
 <section class="testi-section">
   <div class="section-head">
     <div class="section-eyebrow">Happy Customers</div>
@@ -611,7 +284,7 @@
     </div>
     <div class="testi-card">
       <div class="stars">★★★★★</div>
-      <p>"The paneer paratha is out of this world — ordered 10 pieces!"</p>
+      <p>"The palak paneer paratha is out of this world — ordered 10 pieces!"</p>
       <div class="testi-author"><div class="avatar">P</div><div><div class="author-name">Priya S.</div><div class="author-loc">Millburn, NJ</div></div></div>
     </div>
     <div class="testi-card">
@@ -622,172 +295,159 @@
   </div>
 </section>
 
-<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-logo">Fresh From My Kitchen</div>
   <p>Authentic Indian home-cooking · 100% Vegetarian · No Preservatives · Made Fresh Daily</p>
   <p>📍 Spring St, Millburn, NJ &nbsp;·&nbsp; 📞 +1 (973) 449-1261</p>
   <div class="footer-links">
-    <a href="#menu">Menu</a>
-    <a href="#how">How It Works</a>
-    <a href="#order">Order Now</a>
+    <a href="#menu">Menu</a><a href="#how">How It Works</a>
     <a href="https://wa.me/19734491261" target="_blank">WhatsApp</a>
   </div>
 </footer>
 
-<!-- ═══════════════════════ SCRIPTS ═══════════════════════ -->
 <script>
-// ══════════════════════════════════════════════════
-// 📋 YOUR MENU DATA — edit this to update the website
-// ══════════════════════════════════════════════════
-
-// ALL-DAY ITEMS
-// Format: ["Item Name", "$Price", "Description", "Tag"]
-// Tag options: "Popular"  "Spicy"  "Veg"
-const ALLDAY_ITEMS = [
-  ["Paneer Paratha",      "$3.00",  "Stuffed with fresh homemade paneer & fragrant spices.",        "Popular"],
-  ["Methi Paratha",       "$2.00",  "Fresh fenugreek kneaded into whole wheat dough.",              "Veg"],
-  ["Aloo Paratha",        "$2.50",  "Classic potato-stuffed paratha, golden and crispy.",           "Popular"],
-  ["Plain Paratha",       "$1.50",  "Simple whole wheat paratha, perfectly layered.",               "Veg"],
-  ["Gobhi Paratha",       "$2.50",  "Spiced cauliflower filling in soft whole wheat bread.",        "Veg"],
-  ["Mooli Paratha",       "$2.50",  "Fresh grated radish paratha with subtle spices.",              "Veg"],
+// ─────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────
+const SPECIALS = [
+  { name: "Mumbai Misal",                  emoji: "🌶️", price: "$15 · 16oz",  days: [1,0,0,0,0,0,0] },
+  { name: "Bombay Style Pav Bhaji",        emoji: "🍲", price: "$15 · 16oz",  days: [0,0,0,1,0,0,0] },
+  { name: "Dal Dhokli",                    emoji: "🫕", price: "$12 · 24oz",  days: [0,1,0,0,0,0,0] },
+  { name: "Schezwan Fried Rice",           emoji: "🍚", price: "$15 · 16oz",  days: [0,0,0,0,0,1,0] },
+  { name: "Muthiya",                       emoji: "🫙", price: "$15 · 16oz",  days: [0,0,0,0,0,0,0] },
+  { name: "Yellow Khaman",                 emoji: "🟡", price: "WhatsApp me", days: [0,0,0,0,0,0,0] },
+  { name: "Harabhara Kabab",               emoji: "🟢", price: "WhatsApp me", days: [0,0,0,0,0,0,0] },
+  { name: "Rice with Dal Fry / Sambhar",   emoji: "🍵", price: "WhatsApp me", days: [0,0,0,0,0,0,0] },
 ];
 
-// DAILY SPECIALS
-// Format: ["Item Name", "$Price", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-// Put "yes" on days it's available, leave "" for days it's not
-const SPECIALS_ITEMS = [
-  ["Mumbai Misal",  "$15", "yes", "",    "",    "",    "",    "",    "yes"],
-  ["Pav Bhaji",     "$15", "",    "yes", "",    "",    "yes", "",    ""   ],
-  ["Dal Dhokli",    "$12", "",    "",    "yes", "",    "",    "",    "yes"],
-  ["Muthiya",       "$15", "yes", "",    "",    "yes", "yes", "",    "yes"],
-  ["Khichdi",       "$10", "",    "",    "",    "yes", "",    "yes", ""   ],
+const CHUTNEYS = [
+  { name: "Signature Green Chutney",   emoji: "🌿", price: "$10 · 16oz",   desc: "" },
+  { name: "Rajasthani Garlic Chutney", emoji: "🏺", price: "",             desc: "" },
+  { name: "Fresh Mango Pickle",        emoji: "🥭", price: "$10 · 400gms", desc: "" },
 ];
 
-// SWEETS & SEASONAL
-// Format: ["Item Name", "$Price or Enquire", "Description"]
-const SWEETS_ITEMS = [
-  ["Mohanthal",     "$15/box",  "Classic Gujarati gram flour sweet with cardamom & saffron."],
-  ["Ladoo",         "$12/box",  "Besan ladoo made with pure ghee — festive favourite."],
-  ["Shrikhand",     "$8",       "Thick strained yogurt with saffron and cardamom."],
-  ["Gajar Halwa",   "Seasonal", "Slow-cooked carrot halwa with khoya and dry fruits."],
-  ["Gulab Jamun",   "$10/box",  "Soft milk-solid dumplings in rose-flavoured syrup."],
+const SWEETS = [
+  { name: "Signature Kheer", emoji: "🍚", price: "", desc: "" },
+  { name: "Rava Sheera",     emoji: "🥣", price: "", desc: "" },
+  { name: "Aata Halwa",      emoji: "🌾", price: "", desc: "" },
 ];
 
-// ══════════════════════════════════════════════════
-// DISPLAY CODE — no need to edit below this line
-// ══════════════════════════════════════════════════
+var selectedDay = null;
+var DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-const emojiMap = {
-  "paneer": "🧀", "methi": "🌿", "aloo": "🥔",
-  "plain paratha": "🫓", "mooli": "🌱", "gobhi": "🥦",
-  "misal": "🌶️", "pav bhaji": "🥘", "dal dhokli": "🍲",
-  "muthiya": "🌿", "dal": "🍛", "khichdi": "🍚",
-  "chutney": "🥣", "raita": "🥛", "lassi": "🥤",
-  "ladoo": "🟡", "barfi": "🍬", "halwa": "🍮",
-  "gulab": "🌸", "shrikhand": "🍦", "mohanthal": "🍯",
-  "gajar": "🥕", "default": "🍽️"
-};
-
-function getEmoji(name) {
-  const n = (name || "").toLowerCase();
-  for (const [key, val] of Object.entries(emojiMap)) {
-    if (n.includes(key)) return val;
-  }
-  return emojiMap.default;
-}
-
+// ─────────────────────────────────────────────
+// TAB SWITCHING
+// ─────────────────────────────────────────────
 function showTab(id, btn) {
-  ['alldayTab','specialsTab','sweetsTab'].forEach(t => document.getElementById(t).style.display = 'none');
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  ['specialsTab','chutneysTab','sweetsTab'].forEach(function(t) {
+    document.getElementById(t).style.display = 'none';
+  });
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
   document.getElementById(id).style.display = '';
   btn.classList.add('active');
 }
 
-function loadAllDay() {
-  const grid = document.getElementById('allday-grid');
-  grid.innerHTML = '';
-  ALLDAY_ITEMS.forEach(r => {
-    const tagClass = r[3] === 'Popular' ? 'tag-pop' : r[3] === 'Spicy' ? 'tag-spicy' : 'tag-veg';
-    const card = document.createElement('div');
-    card.className = 'menu-card';
-    card.innerHTML = `
-      <div class="menu-card-top">
-        <span class="menu-card-emoji">${getEmoji(r[0])}</span>
-        <span class="tag ${tagClass}">${r[3]}</span>
-      </div>
-      <div class="menu-card-body">
-        <div class="menu-card-name">${r[0]}</div>
-        <div class="menu-card-desc">${r[2]}</div>
-        <div class="menu-card-footer">
-          <span class="menu-price">${r[1]}</span>
-          <a href="https://wa.me/19734491261?text=Hi! I'd like to order: ${encodeURIComponent(r[0])}" target="_blank" class="menu-add">+ Order</a>
-        </div>
-      </div>`;
-    grid.appendChild(card);
-  });
-}
-
+// ─────────────────────────────────────────────
+// LOAD DAILY SPECIALS TABLE (new compact layout)
+// ─────────────────────────────────────────────
 function loadSpecials() {
-  const loadEl = document.getElementById('loading-msg');
-  const tbl = document.getElementById('specials-table');
-  if (loadEl) loadEl.style.display = 'none';
-  tbl.style.display = 'table';
-  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  document.getElementById('specials-head').innerHTML =
-    '<tr><th>Item</th><th>Price</th>' + days.map(d=>`<th>${d}</th>`).join('') + '</tr>';
-  const tbody = document.getElementById('specials-body');
+  var tbody = document.getElementById('specials-body');
   tbody.innerHTML = '';
-  SPECIALS_ITEMS.forEach(r => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td><strong>${r[0]}</strong></td><td>${r[1]}</td>` +
-      r.slice(2).map(v => `<td>${v ? '<span class="avail-dot"></span>' : ''}</td>`).join('');
+  SPECIALS.forEach(function(item, idx) {
+    var available = selectedDay !== null ? item.days[selectedDay] : null;
+    var waMsg = encodeURIComponent('Hi! I\'d like to order: ' + item.name);
+    var tr = document.createElement('tr');
+    tr.dataset.idx = idx;
+    if (selectedDay !== null) {
+      tr.className = available ? 'avail-highlight' : 'row-unavail';
+    }
+    var dotCell = '';
+    if (selectedDay === null) {
+      dotCell = '<td style="text-align:center;color:var(--text-soft);font-size:12px">← Select a day</td>';
+    } else if (available) {
+      dotCell = '<td style="text-align:center"><span class="avail-dot"></span> Available</td>';
+    } else {
+      dotCell = '<td style="text-align:center;font-size:12px;color:#aaa">—</td>';
+    }
+    var orderCell = available
+      ? '<td style="text-align:center"><a href="https://wa.me/19734491261?text=' + waMsg + '" target="_blank" class="menu-add">Order</a></td>'
+      : '<td></td>';
+    tr.innerHTML =
+      '<td><strong>' + item.emoji + ' ' + item.name + '</strong></td>' +
+      '<td style="font-weight:600;white-space:nowrap">' + item.price + '</td>' +
+      dotCell +
+      (selectedDay !== null ? orderCell : '<td></td>');
     tbody.appendChild(tr);
   });
 }
 
-function loadSweets() {
-  const grid = document.getElementById('sweets-grid');
-  grid.innerHTML = '';
-  SWEETS_ITEMS.forEach(r => {
-    const card = document.createElement('div');
+// ─────────────────────────────────────────────
+// DAY SELECTOR
+// ─────────────────────────────────────────────
+function selectDay(dayIdx, btn) {
+  if (selectedDay === dayIdx) {
+    // deselect
+    selectedDay = null;
+    btn.classList.remove('active');
+    document.getElementById('day-order-btn-wrap').style.display = 'none';
+  } else {
+    selectedDay = dayIdx;
+    document.querySelectorAll('.day-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    // Build "order all available" WhatsApp link
+    var dayName = DAY_NAMES[dayIdx];
+    var availItems = SPECIALS.filter(function(s) { return s.days[dayIdx]; }).map(function(s) { return s.name; });
+    var wrap = document.getElementById('day-order-btn-wrap');
+    if (availItems.length > 0) {
+      var msg = encodeURIComponent("Hi! I'd like to order for " + dayName + ":\n" + availItems.join(", "));
+      document.getElementById('day-order-btn').href = 'https://wa.me/19734491261?text=' + msg;
+      document.getElementById('day-label-btn').textContent = dayName;
+      wrap.style.display = '';
+    } else {
+      wrap.style.display = 'none';
+    }
+  }
+  loadSpecials();
+}
+
+document.querySelectorAll('.day-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    selectDay(parseInt(this.dataset.day), this);
+  });
+});
+
+// ─────────────────────────────────────────────
+// BUILD MENU CARDS
+// ─────────────────────────────────────────────
+function buildCards(items, gridId, tagLabel, tagClass) {
+  var grid = document.getElementById(gridId);
+  items.forEach(function(item) {
+    var waMsg = encodeURIComponent('Hi! I\'d like to enquire about: ' + item.name);
+    var card = document.createElement('div');
     card.className = 'menu-card';
-    card.innerHTML = `
-      <div class="menu-card-top">
-        <span class="menu-card-emoji">${getEmoji(r[0])}</span>
-        <span class="tag tag-pop">Sweet</span>
-      </div>
-      <div class="menu-card-body">
-        <div class="menu-card-name">${r[0]}</div>
-        <div class="menu-card-desc">${r[2]}</div>
-        <div class="menu-card-footer">
-          <span class="menu-price">${r[1]}</span>
-          <a href="https://wa.me/19734491261?text=Hi! I'd like to enquire about: ${encodeURIComponent(r[0])}" target="_blank" class="menu-add">Enquire</a>
-        </div>
-      </div>`;
+    card.innerHTML =
+      '<div class="menu-card-top">' +
+        '<span class="menu-card-emoji">' + item.emoji + '</span>' +
+        '<span class="tag ' + tagClass + '">' + tagLabel + '</span>' +
+      '</div>' +
+      '<div class="menu-card-body">' +
+        '<div class="menu-card-name">' + item.name + '</div>' +
+        '<div class="menu-card-footer">' +
+          (item.price ? '<span class="menu-price">' + item.price + '</span>' : '<span></span>') +
+          '<a href="https://wa.me/19734491261?text=' + waMsg + '" target="_blank" class="menu-add">Enquire</a>' +
+        '</div>' +
+      '</div>';
     grid.appendChild(card);
   });
 }
 
-function sendOrder() {
-  const name  = document.getElementById('fname').value.trim();
-  const phone = document.getElementById('fphone').value.trim();
-  const day   = document.getElementById('fday').value;
-  const items = document.getElementById('fitems').value.trim();
-  const notes = document.getElementById('fnotes').value.trim();
-  if (!name || !items) { alert("Please enter your name and what you'd like to order."); return; }
-  let msg = `Hi! I'd like to place an order 🙏\n\n*Name:* ${name}`;
-  if (phone) msg += `\n*Phone:* ${phone}`;
-  if (day)   msg += `\n*Pickup Day:* ${day}`;
-  msg += `\n*Order:* ${items}`;
-  if (notes) msg += `\n*Notes:* ${notes}`;
-  window.open(`https://wa.me/19734491261?text=${encodeURIComponent(msg)}`, '_blank');
-}
-
-// Init
-loadAllDay();
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
 loadSpecials();
-loadSweets();
+buildCards(CHUTNEYS, 'chutneys-grid', 'Any Time', 'tag-anytime');
+buildCards(SWEETS,   'sweets-grid',   'Sweet',    'tag-sweet');
 </script>
 </body>
 </html>
