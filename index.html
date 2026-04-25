@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fresh From My Kitchen — Authentic Indian Home Food · Millburn, NJ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ── DESIGN TOKENS ── */
+  :root {
+    --brown: #2C1A0E;
+    --brown-mid: #3d2410;
+    --gold: #C9973A;
+    --gold-light: #E8B96A;
+    --cream: #FDF6E3;
+    --cream-mid: #FEF9ED;
+    --terra: #C0552A;
+    --text-dark: #1E1208;
+    --text-mid: #6B4226;
+    --text-soft: #8B6040;
+    --green: #3D5A40;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--brown);
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 32px;
+    border-bottom: 1px solid rgba(201,151,58,.2);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-light);
+    font-size: 20px;
+    letter-spacing: .02em;
+  }
+  .nav-links { display: flex; gap: 24px; align-items: center; }
+  .nav-links a {
+    color: rgba(253,246,227,.55);
+    font-size: 13px; font-weight: 500;
+    text-decoration: none; letter-spacing: .08em;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--brown) !important;
+    font-weight: 600 !important;
+    padding: 8px 18px;
+    border-radius: 3px;
+  }
+  @media (max-width: 600px) {
+    nav { padding: 12px 18px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #fdf6e3 0%, #fef9ed 50%, #fdf0d8 100%);
+    padding: 72px 32px 64px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(201,151,58,.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(192,85,42,.06) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner { max-width: 640px; position: relative; z-index: 1; }
+  .hero-eyebrow {
+    display: inline-block;
+    background: rgba(201,151,58,.12);
+    border: 1px solid rgba(201,151,58,.35);
+    color: var(--brown);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .18em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 2px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 8vw, 68px);
+    line-height: 1.05;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+  }
+  .hero h1 em { color: var(--terra); font-style: italic; }
+  .hero-loc {
+    font-size: 11px; color: var(--text-mid);
+    text-transform: uppercase; letter-spacing: .12em;
+    margin-bottom: 16px;
+  }
+  .hero-sub {
+    font-size: 16px; color: var(--text-soft);
+    line-height: 1.7; max-width: 440px;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--brown);
+    font-size: 13px; font-weight: 700;
+    padding: 13px 28px; border-radius: 3px;
+    letter-spacing: .1em; text-transform: uppercase;
+    text-decoration: none; display: inline-block;
+    transition: transform .15s, box-shadow .15s;
+    box-shadow: 0 4px 16px rgba(201,151,58,.3);
+  }
+  .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(201,151,58,.4); }
+  .btn-wa {
+    background: #25d366;
+    color: #fff;
+    font-size: 13px; font-weight: 600;
+    padding: 13px 28px; border-radius: 3px;
+    letter-spacing: .08em; text-transform: uppercase;
+    text-decoration: none; display: inline-block;
+    transition: transform .15s;
+  }
+  .btn-wa:hover { transform: translateY(-1px); }
+  .trust-row { display: flex; gap: 20px; flex-wrap: wrap; }
+  .trust-item {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 12px; color: var(--text-mid); font-weight: 500;
+  }
+  .trust-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+  /* ── SECTION SHELL ── */
+  section { padding: 64px 32px; }
+  .section-eyebrow {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 40px);
+    line-height: 1.1; margin-bottom: 8px;
+  }
+  .section-sub { font-size: 15px; color: var(--text-soft); font-weight: 300; line-height: 1.6; }
+  .section-head { text-align: center; max-width: 540px; margin: 0 auto 40px; }
+
+  /* ── MENU SECTION ── */
+  .menu-section { background: var(--brown); }
+  .menu-section .section-eyebrow { color: var(--gold); }
+  .menu-section .section-title { color: var(--cream); }
+  .menu-section .section-sub { color: rgba(253,246,227,.5); }
+
+  /* TABS */
+  .menu-tabs {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    justify-content: center; margin-bottom: 32px;
+  }
+  .tab-btn {
+    background: transparent;
+    border: 1px solid rgba(201,151,58,.3);
+    color: rgba(253,246,227,.5);
+    font-size: 12px; font-weight: 600;
+    padding: 7px 16px; border-radius: 3px;
+    letter-spacing: .1em; text-transform: uppercase;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all .2s;
+  }
+  .tab-btn:hover, .tab-btn.active {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--brown); border-color: var(--gold);
+  }
+
+  /* MENU GRID */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px; max-width: 960px; margin: 0 auto;
+  }
+  .menu-card {
+    background: var(--cream);
+    border-radius: 6px; overflow: hidden;
+    border: 1px solid rgba(180,140,60,.15);
+    display: flex; flex-direction: column;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .menu-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,.15); }
+  .menu-card-top {
+    background: linear-gradient(135deg, var(--brown), var(--brown-mid));
+    padding: 14px;
+    display: flex; align-items: flex-start; justify-content: space-between;
+  }
+  .menu-card-emoji { font-size: 26px; }
+  .tag {
+    font-size: 9px; font-weight: 700;
+    padding: 2px 7px; border-radius: 2px;
+    letter-spacing: .08em; text-transform: uppercase;
+  }
+  .tag-veg { background: rgba(61,90,64,.4); color: #a8d4aa; border: 1px solid rgba(61,90,64,.5); }
+  .tag-pop { background: rgba(201,151,58,.25); color: var(--gold-light); border: 1px solid rgba(201,151,58,.4); }
+  .tag-spicy { background: rgba(192,85,42,.25); color: #f0a070; border: 1px solid rgba(192,85,42,.4); }
+  .menu-card-body { padding: 12px 14px; flex: 1; }
+  .menu-card-name { font-size: 15px; font-weight: 600; color: var(--text-dark); margin-bottom: 4px; }
+  .menu-card-desc { font-size: 12px; color: var(--text-soft); line-height: 1.5; margin-bottom: 10px; font-weight: 300; }
+  .menu-card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(180,130,40,.12); padding-top: 10px;
+  }
+  .menu-price { font-size: 17px; font-weight: 700; color: var(--text-dark); }
+  .menu-add {
+    background: linear-gradient(135deg, var(--brown), var(--brown-mid));
+    color: var(--gold-light);
+    font-size: 10px; font-weight: 700;
+    padding: 6px 12px; border-radius: 2px;
+    border: none; cursor: pointer;
+    letter-spacing: .1em; text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none; display: inline-block;
+  }
+
+  /* DAILY SPECIALS TABLE */
+  .specials-wrap { max-width: 960px; margin: 0 auto; }
+  .specials-header {
+    background: var(--brown-mid);
+    border-radius: 6px 6px 0 0;
+    padding: 10px 16px;
+    display: flex; align-items: center; gap: 10px;
+    border: 1px solid rgba(201,151,58,.2);
+    border-bottom: none;
+  }
+  .specials-header span { font-size: 13px; color: var(--gold-light); font-weight: 500; }
+  .live-badge {
+    background: rgba(201,151,58,.2);
+    border: 1px solid rgba(201,151,58,.4);
+    color: var(--gold); font-size: 9px;
+    padding: 2px 7px; border-radius: 2px;
+    letter-spacing: .08em; font-weight: 600;
+  }
+  .specials-table-wrap {
+    overflow-x: auto;
+    border: 1px solid rgba(201,151,58,.2);
+    border-top: none; border-radius: 0 0 6px 6px;
+    background: var(--cream);
+  }
+  table { width: 100%; border-collapse: collapse; min-width: 500px; }
+  th {
+    background: rgba(201,151,58,.12);
+    font-size: 11px; font-weight: 700;
+    color: var(--text-dark); padding: 10px 12px;
+    border: 1px solid rgba(180,130,40,.15); text-align: left;
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+  td {
+    font-size: 13px; color: var(--text-mid);
+    padding: 9px 12px; border: 1px solid rgba(180,130,40,.1);
+    vertical-align: middle;
+  }
+  tr:nth-child(even) td { background: rgba(254,249,237,.5); }
+  .avail-dot { display: inline-block; width: 10px; height: 10px; background: var(--green); border-radius: 50%; }
+  #loading-msg { color: rgba(253,246,227,.5); text-align: center; padding: 32px; font-size: 14px; }
+  #loading-all { color: var(--text-soft); text-align: center; padding: 32px; font-size: 14px; }
+  #loading-sweets { color: var(--text-soft); text-align: center; padding: 32px; font-size: 14px; }
+
+  /* ── HOW IT WORKS ── */
+  .how-section { background: var(--cream-mid); }
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px; max-width: 880px; margin: 0 auto;
+  }
+  .how-card {
+    background: linear-gradient(160deg, var(--cream), #fff8e7);
+    border: 1px solid rgba(180,130,40,.18);
+    border-radius: 6px; padding: 24px 20px; text-align: center;
+  }
+  .how-num {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--brown), var(--brown-mid));
+    color: var(--gold-light); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700;
+    margin: 0 auto 10px;
+  }
+  .how-icon { font-size: 28px; margin-bottom: 10px; }
+  .how-card h4 { font-size: 16px; font-weight: 600; color: var(--text-dark); margin-bottom: 6px; }
+  .how-card p { font-size: 13px; color: var(--text-soft); line-height: 1.5; font-weight: 300; }
+
+  /* ── ORDER SECTION ── */
+  .order-section { background: var(--cream); }
+  .order-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 40px; max-width: 900px; margin: 0 auto;
+  }
+  @media (max-width: 700px) { .order-grid { grid-template-columns: 1fr; } }
+  .contact-block {
+    background: rgba(44,26,14,.05);
+    border: 1px solid rgba(201,151,58,.2);
+    border-radius: 6px; padding: 20px;
+    margin-top: 20px;
+  }
+  .contact-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
+  .contact-row:last-child { margin-bottom: 0; }
+  .contact-icon { font-size: 18px; width: 24px; flex-shrink: 0; margin-top: 1px; }
+  .contact-text strong { display: block; font-size: 14px; color: var(--text-dark); margin-bottom: 2px; }
+  .contact-text span { font-size: 12px; color: var(--text-soft); }
+  .order-form {
+    background: linear-gradient(160deg, var(--cream), var(--cream-mid));
+    border: 1px solid rgba(180,140,60,.2);
+    border-radius: 6px; padding: 28px;
+  }
+  .order-form h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--text-dark); margin-bottom: 20px;
+  }
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block; font-size: 10px; color: var(--text-mid);
+    text-transform: uppercase; letter-spacing: .12em;
+    font-weight: 700; margin-bottom: 5px;
+  }
+  .field input, .field textarea, .field select {
+    width: 100%; padding: 10px 12px;
+    border: 1px solid rgba(180,130,40,.25);
+    border-radius: 3px; font-size: 14px;
+    color: var(--text-dark); background: rgba(253,246,227,.7);
+    font-family: 'DM Sans', sans-serif;
+    outline: none; transition: border-color .2s;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    border-color: var(--gold);
+  }
+  .field textarea { height: 80px; resize: vertical; }
+  .submit-btn {
+    width: 100%; padding: 14px;
+    background: linear-gradient(135deg, var(--brown), var(--brown-mid));
+    color: var(--gold-light); border: none; border-radius: 3px;
+    font-size: 13px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; cursor: pointer; margin-top: 6px;
+    font-family: 'DM Sans', sans-serif;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(44,26,14,.25); }
+
+  /* ── TESTIMONIALS ── */
+  .testi-section { background: #1a1008; }
+  .testi-section .section-title { color: var(--cream); }
+  .testi-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px; max-width: 960px; margin: 0 auto;
+  }
+  .testi-card {
+    background: rgba(44,26,14,.7);
+    border: 1px solid rgba(180,130,40,.18);
+    border-radius: 6px; padding: 20px;
+  }
+  .stars { color: var(--gold); font-size: 14px; letter-spacing: 2px; margin-bottom: 10px; }
+  .testi-card p { font-size: 14px; color: rgba(253,246,227,.75); line-height: 1.6; font-style: italic; margin-bottom: 14px; font-weight: 300; }
+  .testi-author { display: flex; align-items: center; gap: 10px; }
+  .avatar {
+    width: 32px; height: 32px; border-radius: 3px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--brown); display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex-shrink: 0;
+  }
+  .author-name { font-size: 13px; font-weight: 600; color: var(--cream); }
+  .author-loc { font-size: 11px; color: rgba(253,246,227,.4); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: linear-gradient(135deg, var(--brown), var(--brown-mid));
+    padding: 40px 32px; text-align: center;
+    border-top: 1px solid rgba(201,151,58,.2);
+  }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--gold-light); margin-bottom: 8px; }
+  footer p { font-size: 13px; color: rgba(253,246,227,.5); line-height: 1.7; margin-bottom: 4px; }
+  .footer-links { display: flex; gap: 20px; justify-content: center; margin: 16px 0 0; flex-wrap: wrap; }
+  .footer-links a {
+    color: rgba(253,246,227,.35); font-size: 11px;
+    letter-spacing: .12em; text-transform: uppercase;
+    text-decoration: none; transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--gold-light); }
+
+  /* ── SWEETS SECTION ── */
+  .sweets-section { background: var(--cream); }
+
+  /* ── UTILITY ── */
+  .centered { text-align: center; }
+  .mt16 { margin-top: 16px; }
+  @media (max-width: 600px) {
+    section { padding: 48px 18px; }
+    .hero { padding: 48px 18px 40px; }
+    nav { padding: 12px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ NAV ═══════════════════════ -->
+<nav>
+  <div class="nav-logo">✦ Fresh From My Kitchen</div>
+  <div class="nav-links">
+    <a href="#menu">Menu</a>
+    <a href="#how">How It Works</a>
+    <a href="#order" class="nav-cta">Order Now</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">✦ Homemade · No Preservatives · 100% Vegetarian</div>
+    <h1>Real Food.<br/><em>Real Flavour.</em></h1>
+    <div class="hero-loc">📍 Millburn, New Jersey</div>
+    <p class="hero-sub">Authentic Indian home-cooking — made fresh daily with clean ingredients. Parathas, Gujarati classics, chutneys &amp; more. <strong>Order a day in advance.</strong></p>
+    <div class="hero-btns">
+      <a href="#order" class="btn-gold">🍽 Order Now</a>
+      <a href="https://wa.me/19734491261" target="_blank" class="btn-wa">💬 WhatsApp Us</a>
+    </div>
+    <div class="trust-row">
+      <div class="trust-item"><span class="trust-dot"></span>100% Vegetarian</div>
+      <div class="trust-item"><span class="trust-dot"></span>Made Fresh Daily</div>
+      <div class="trust-item"><span class="trust-dot"></span>Local Pickup Only</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ MENU ═══════════════════════ -->
+<section class="menu-section" id="menu">
+  <div class="section-head">
+    <div class="section-eyebrow">Made Fresh Daily</div>
+    <h2 class="section-title" style="color:var(--cream)">Our Menu</h2>
+    <p class="section-sub">100% vegetarian · no preservatives · made with love</p>
+  </div>
+
+  <!-- TABS -->
+  <div class="menu-tabs">
+    <button class="tab-btn active" onclick="showTab('alldayTab', this)">🫓 All-Day Items</button>
+    <button class="tab-btn" onclick="showTab('specialsTab', this)">📅 Daily Specials</button>
+    <button class="tab-btn" onclick="showTab('sweetsTab', this)">🍬 Sweets &amp; Seasonal</button>
+  </div>
+
+  <!-- ALL-DAY ITEMS TAB -->
+  <div id="alldayTab">
+    <div class="menu-grid" id="allday-grid">
+      <div id="loading-all" style="color:rgba(253,246,227,.5);text-align:center;padding:48px;grid-column:1/-1;">Loading menu…</div>
+    </div>
+  </div>
+
+  <!-- DAILY SPECIALS TAB -->
+  <div id="specialsTab" style="display:none">
+    <div class="specials-wrap">
+      <div class="specials-header">
+        <span>📊 Daily Specials Schedule</span>
+        <span class="live-badge">Live from Google Sheets</span>
+      </div>
+      <div class="specials-table-wrap">
+        <div id="loading-msg" style="padding:48px;">Loading specials…</div>
+        <table id="specials-table" style="display:none">
+          <thead id="specials-head"></thead>
+          <tbody id="specials-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SWEETS TAB -->
+  <div id="sweetsTab" style="display:none">
+    <div class="menu-grid" id="sweets-grid">
+      <div id="loading-sweets" style="color:rgba(253,246,227,.5);text-align:center;padding:48px;grid-column:1/-1;">Loading sweets…</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ HOW IT WORKS ═══════════════════════ -->
+<section class="how-section" id="how">
+  <div class="section-head" style="color:var(--text-dark)">
+    <div class="section-eyebrow" style="color:var(--gold)">Simple &amp; Easy</div>
+    <h2 class="section-title">How It Works</h2>
+  </div>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-num">1</div>
+      <div class="how-icon">📋</div>
+      <h4>Browse the Menu</h4>
+      <p>Explore fresh dishes &amp; scroll through our daily specials</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">2</div>
+      <div class="how-icon">💬</div>
+      <h4>Place Your Order</h4>
+      <p>Fill the form below or WhatsApp us directly</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">3</div>
+      <div class="how-icon">🍳</div>
+      <h4>We Cook Fresh</h4>
+      <p>Made the same day — no preservatives, no shortcuts</p>
+    </div>
+    <div class="how-card">
+      <div class="how-num">4</div>
+      <div class="how-icon">🚗</div>
+      <h4>Local Pickup Only</h4>
+      <p>Spring St, Millburn NJ — call before arriving</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ ORDER SECTION ═══════════════════════ -->
+<section class="order-section" id="order">
+  <div class="section-head">
+    <div class="section-eyebrow">Ready to Eat?</div>
+    <h2 class="section-title">Place Your Order</h2>
+    <p class="section-sub">Fill the form and we'll confirm via WhatsApp</p>
+  </div>
+  <div class="order-grid">
+    <div>
+      <p style="font-size:15px;color:var(--text-soft);line-height:1.7;font-weight:300">
+        We cook everything fresh — please order <strong>at least one day in advance</strong> so we can prepare for you.
+      </p>
+      <div class="contact-block">
+        <div class="contact-row">
+          <div class="contact-icon">📞</div>
+          <div class="contact-text">
+            <strong>+1 (973) 449-1261</strong>
+            <span>Call or text us anytime</span>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">📍</div>
+          <div class="contact-text">
+            <strong>Spring St, Millburn NJ</strong>
+            <span>Pickup only — no delivery</span>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">📅</div>
+          <div class="contact-text">
+            <strong>Order 1 Day in Advance</strong>
+            <span>So everything is made fresh for you</span>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">💬</div>
+          <div class="contact-text">
+            <strong><a href="https://wa.me/19734491261" target="_blank" style="color:var(--text-dark);text-decoration:none">WhatsApp Us Directly</a></strong>
+            <span>Fastest way to reach us</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="order-form">
+      <h3>📋 Order Now</h3>
+      <div class="field">
+        <label>Your Name</label>
+        <input type="text" id="fname" placeholder="Jane Smith"/>
+      </div>
+      <div class="field">
+        <label>Phone Number</label>
+        <input type="tel" id="fphone" placeholder="+1 973 000 0000"/>
+      </div>
+      <div class="field">
+        <label>Pickup Day</label>
+        <select id="fday">
+          <option value="">Select a day…</option>
+          <option>Monday</option><option>Tuesday</option><option>Wednesday</option>
+          <option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Items &amp; Quantities</label>
+        <textarea id="fitems" placeholder="e.g. 4× Paneer Paratha, 2× Mumbai Misal…"></textarea>
+      </div>
+      <div class="field">
+        <label>Special Notes</label>
+        <input type="text" id="fnotes" placeholder="Allergies, preferences…"/>
+      </div>
+      <button class="submit-btn" onclick="sendOrder()">✉ Send Order via WhatsApp</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ TESTIMONIALS ═══════════════════════ -->
+<section class="testi-section">
+  <div class="section-head">
+    <div class="section-eyebrow">Happy Customers</div>
+    <h2 class="section-title">What People Are Saying</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"Loved the daal, paranthe are definitely the house specialty!"</p>
+      <div class="testi-author"><div class="avatar">B</div><div><div class="author-name">Bharti</div><div class="author-loc">Happy Customer</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"The paneer paratha is out of this world — ordered 10 pieces!"</p>
+      <div class="testi-author"><div class="avatar">P</div><div><div class="author-name">Priya S.</div><div class="author-loc">Millburn, NJ</div></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>"Dal dhokli took me straight back to my grandmother's kitchen. Pure love in every bite."</p>
+      <div class="testi-author"><div class="avatar">R</div><div><div class="author-name">Rahul M.</div><div class="author-loc">Short Hills, NJ</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+  <div class="footer-logo">Fresh From My Kitchen</div>
+  <p>Authentic Indian home-cooking · 100% Vegetarian · No Preservatives · Made Fresh Daily</p>
+  <p>📍 Spring St, Millburn, NJ &nbsp;·&nbsp; 📞 +1 (973) 449-1261</p>
+  <div class="footer-links">
+    <a href="#menu">Menu</a>
+    <a href="#how">How It Works</a>
+    <a href="#order">Order Now</a>
+    <a href="https://wa.me/19734491261" target="_blank">WhatsApp</a>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ SCRIPTS ═══════════════════════ -->
+<script>
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 🔧 PASTE YOUR GOOGLE SHEET ID HERE
+// e.g. if your sheet URL is:
+// https://docs.google.com/spreadsheets/d/1ABC123XYZ.../edit
+// then SHEET_ID = "1ABC123XYZ..."
+const SHEET_ID = "1_ptMlMLoAOX68mLhxSKMaRDPeqxKfo-4kYrrDLjU7ek";
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// Sheet tab names (must match exactly)
+const TABS = {
+  allDay:   "All-Day Items",
+  specials: "Daily Specials",
+  sweets:   "Sweets & Seasonal"
+};
+
+// Emojis & tags for known menu items
+const emojiMap = {
+  "paneer paratha": "🧀", "methi paratha": "🌿", "aloo paratha": "🥔",
+  "plain paratha": "🫓", "mooli paratha": "🌱", "gobhi paratha": "🥦",
+  "misal": "🌶️", "pav bhaji": "🥘", "dal dhokli": "🍲",
+  "muthiya": "🌿", "dal": "🍛", "khichdi": "🍚",
+  "chutney": "🥣", "raita": "🥛", "lassi": "🥤",
+  "ladoo": "🟡", "barfi": "🍬", "halwa": "🍮",
+  "gulab": "🌸", "shrikhand": "🍦", "kheer": "🍮",
+  "default": "🍽️"
+};
+function getEmoji(name) {
+  const n = (name || "").toLowerCase();
+  for (const [key, val] of Object.entries(emojiMap)) {
+    if (n.includes(key)) return val;
+  }
+  return emojiMap.default;
+}
+
+const tagMap = {
+  popular: "tag-pop", spicy: "tag-spicy", veg: "tag-veg"
+};
+function getTag(row) {
+  const t = (row[3] || row[2] || "").toLowerCase();
+  if (t.includes("popular")) return ["Popular", "tag-pop"];
+  if (t.includes("spicy")) return ["Spicy", "tag-spicy"];
+  return ["Veg", "tag-veg"];
+}
+
+// Fetch a sheet tab as CSV
+async function fetchSheet(tabName) {
+  if (SHEET_ID === "YOUR_SHEET_ID_HERE") return null;
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tabName)}`;
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const text = await res.text();
+    return parseCSV(text);
+  } catch(e) {
+    return null;
+  }
+}
+
+// Simple CSV parser
+function parseCSV(text) {
+  const rows = [];
+  const lines = text.split('\n');
+  for (const line of lines) {
+    if (!line.trim()) continue;
+    const cols = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      if (line[i] === '"') { inQ = !inQ; continue; }
+      if (line[i] === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
+      else cur += line[i];
+    }
+    cols.push(cur.trim());
+    rows.push(cols);
+  }
+  return rows;
+}
+
+// Render All-Day Items
+async function loadAllDay() {
+  const rows = await fetchSheet(TABS.allDay);
+  const grid = document.getElementById('allday-grid');
+  const loadEl = document.getElementById('loading-all');
+  if (!rows || rows.length <= 1) {
+    if (loadEl) loadEl.innerHTML = SHEET_ID === "YOUR_SHEET_ID_HERE"
+      ? '⚠️ Add your Google Sheet ID to the HTML file to load live menu data.'
+      : '⚠️ Could not load menu. Make sure your sheet is shared publicly.';
+    return;
+  }
+  if (loadEl) loadEl.remove();
+  // rows[0] is header: Item, Price, Description, Tag…
+  for (let i = 1; i < rows.length; i++) {
+    const r = rows[i];
+    if (!r[0]) continue;
+    const [tagLabel, tagClass] = getTag(r);
+    const card = document.createElement('div');
+    card.className = 'menu-card';
+    card.innerHTML = `
+      <div class="menu-card-top">
+        <span class="menu-card-emoji">${getEmoji(r[0])}</span>
+        <span class="tag ${tagClass}">${tagLabel}</span>
+      </div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">${r[0]}</div>
+        <div class="menu-card-desc">${r[2] || ''}</div>
+        <div class="menu-card-footer">
+          <span class="menu-price">${r[1] || ''}</span>
+          <a href="https://wa.me/19734491261?text=Hi! I'd like to order: ${encodeURIComponent(r[0])}" target="_blank" class="menu-add">+ Order</a>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  }
+}
+
+// Render Daily Specials
+async function loadSpecials() {
+  const rows = await fetchSheet(TABS.specials);
+  const loadEl = document.getElementById('loading-msg');
+  const tbl = document.getElementById('specials-table');
+  if (!rows || rows.length <= 1) {
+    if (loadEl) loadEl.innerHTML = SHEET_ID === "YOUR_SHEET_ID_HERE"
+      ? '⚠️ Add your Google Sheet ID to see live specials.'
+      : '⚠️ Could not load specials.';
+    return;
+  }
+  if (loadEl) loadEl.style.display = 'none';
+  tbl.style.display = 'table';
+  // Header row
+  const thead = document.getElementById('specials-head');
+  const hr = document.createElement('tr');
+  rows[0].forEach(h => {
+    const th = document.createElement('th');
+    th.textContent = h;
+    hr.appendChild(th);
+  });
+  thead.appendChild(hr);
+  // Data rows
+  const tbody = document.getElementById('specials-body');
+  for (let i = 1; i < rows.length; i++) {
+    if (!rows[i][0]) continue;
+    const tr = document.createElement('tr');
+    rows[i].forEach((cell, ci) => {
+      const td = document.createElement('td');
+      const low = cell.toLowerCase();
+      if (ci >= 2 && (low === 'yes' || low === 'y' || low === '✓' || low === 'x' || low === '1')) {
+        td.innerHTML = '<span class="avail-dot"></span>';
+      } else {
+        td.textContent = cell;
+      }
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  }
+}
+
+// Render Sweets
+async function loadSweets() {
+  const rows = await fetchSheet(TABS.sweets);
+  const grid = document.getElementById('sweets-grid');
+  const loadEl = document.getElementById('loading-sweets');
+  if (!rows || rows.length <= 1) {
+    if (loadEl) loadEl.innerHTML = SHEET_ID === "YOUR_SHEET_ID_HERE"
+      ? '⚠️ Add your Google Sheet ID to load sweets.'
+      : '⚠️ Could not load sweets.';
+    return;
+  }
+  if (loadEl) loadEl.remove();
+  for (let i = 1; i < rows.length; i++) {
+    const r = rows[i];
+    if (!r[0]) continue;
+    const card = document.createElement('div');
+    card.className = 'menu-card';
+    card.innerHTML = `
+      <div class="menu-card-top">
+        <span class="menu-card-emoji">${getEmoji(r[0])}</span>
+        <span class="tag tag-pop">Sweet</span>
+      </div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">${r[0]}</div>
+        <div class="menu-card-desc">${r[2] || ''}</div>
+        <div class="menu-card-footer">
+          <span class="menu-price">${r[1] || 'Enquire'}</span>
+          <a href="https://wa.me/19734491261?text=Hi! I'd like to enquire about: ${encodeURIComponent(r[0])}" target="_blank" class="menu-add">Enquire</a>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  }
+}
+
+// Tab switching
+function showTab(id, btn) {
+  ['alldayTab','specialsTab','sweetsTab'].forEach(t => document.getElementById(t).style.display = 'none');
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).style.display = '';
+  btn.classList.add('active');
+}
+
+// WhatsApp order builder
+function sendOrder() {
+  const name    = document.getElementById('fname').value.trim();
+  const phone   = document.getElementById('fphone').value.trim();
+  const day     = document.getElementById('fday').value;
+  const items   = document.getElementById('fitems').value.trim();
+  const notes   = document.getElementById('fnotes').value.trim();
+  if (!name || !items) { alert('Please enter your name and what you'd like to order.'); return; }
+  let msg = `Hi! I'd like to place an order 🙏\n\n*Name:* ${name}`;
+  if (phone) msg += `\n*Phone:* ${phone}`;
+  if (day)   msg += `\n*Pickup Day:* ${day}`;
+  msg += `\n*Order:* ${items}`;
+  if (notes) msg += `\n*Notes:* ${notes}`;
+  window.open(`https://wa.me/19734491261?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// Init
+loadAllDay();
+loadSpecials();
+loadSweets();
+</script>
+</body>
+</html>
