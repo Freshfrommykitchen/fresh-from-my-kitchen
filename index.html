@@ -637,33 +637,58 @@
 
 <!-- ═══════════════════════ SCRIPTS ═══════════════════════ -->
 <script>
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// 🔧 PASTE YOUR GOOGLE SHEET ID HERE
-// e.g. if your sheet URL is:
-// https://docs.google.com/spreadsheets/d/1ABC123XYZ.../edit
-// then SHEET_ID = "1ABC123XYZ..."
-const SHEET_ID = "1_ptMlMLoAOX68mLhxSKMaRDPeqxKfo-4kYrrDLjU7ek";
-const PUB_ID = "2PACX-1vQkhwUPjT9fNc3gKnSYZSgaIbSfh17iMAmmSDTvGkK5epvZ5PmxZQX95gVyhgp1K-gNyE_t2vQ8bHMo";
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ══════════════════════════════════════════════════
+// 📋 YOUR MENU DATA — edit this to update the website
+// ══════════════════════════════════════════════════
 
-// Sheet tab names (must match exactly)
-const TABS = {
-  allDay:   "All-Day Items",
-  specials: "Daily Specials",
-  sweets:   "Sweets & Seasonal"
-};
+// ALL-DAY ITEMS
+// Format: ["Item Name", "$Price", "Description", "Tag"]
+// Tag options: "Popular"  "Spicy"  "Veg"
+const ALLDAY_ITEMS = [
+  ["Paneer Paratha",      "$3.00",  "Stuffed with fresh homemade paneer & fragrant spices.",        "Popular"],
+  ["Methi Paratha",       "$2.00",  "Fresh fenugreek kneaded into whole wheat dough.",              "Veg"],
+  ["Aloo Paratha",        "$2.50",  "Classic potato-stuffed paratha, golden and crispy.",           "Popular"],
+  ["Plain Paratha",       "$1.50",  "Simple whole wheat paratha, perfectly layered.",               "Veg"],
+  ["Gobhi Paratha",       "$2.50",  "Spiced cauliflower filling in soft whole wheat bread.",        "Veg"],
+  ["Mooli Paratha",       "$2.50",  "Fresh grated radish paratha with subtle spices.",              "Veg"],
+];
 
-// Emojis & tags for known menu items
+// DAILY SPECIALS
+// Format: ["Item Name", "$Price", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+// Put "yes" on days it's available, leave "" for days it's not
+const SPECIALS_ITEMS = [
+  ["Mumbai Misal",  "$15", "yes", "",    "",    "",    "",    "",    "yes"],
+  ["Pav Bhaji",     "$15", "",    "yes", "",    "",    "yes", "",    ""   ],
+  ["Dal Dhokli",    "$12", "",    "",    "yes", "",    "",    "",    "yes"],
+  ["Muthiya",       "$15", "yes", "",    "",    "yes", "yes", "",    "yes"],
+  ["Khichdi",       "$10", "",    "",    "",    "yes", "",    "yes", ""   ],
+];
+
+// SWEETS & SEASONAL
+// Format: ["Item Name", "$Price or Enquire", "Description"]
+const SWEETS_ITEMS = [
+  ["Mohanthal",     "$15/box",  "Classic Gujarati gram flour sweet with cardamom & saffron."],
+  ["Ladoo",         "$12/box",  "Besan ladoo made with pure ghee — festive favourite."],
+  ["Shrikhand",     "$8",       "Thick strained yogurt with saffron and cardamom."],
+  ["Gajar Halwa",   "Seasonal", "Slow-cooked carrot halwa with khoya and dry fruits."],
+  ["Gulab Jamun",   "$10/box",  "Soft milk-solid dumplings in rose-flavoured syrup."],
+];
+
+// ══════════════════════════════════════════════════
+// DISPLAY CODE — no need to edit below this line
+// ══════════════════════════════════════════════════
+
 const emojiMap = {
-  "paneer paratha": "🧀", "methi paratha": "🌿", "aloo paratha": "🥔",
-  "plain paratha": "🫓", "mooli paratha": "🌱", "gobhi paratha": "🥦",
+  "paneer": "🧀", "methi": "🌿", "aloo": "🥔",
+  "plain paratha": "🫓", "mooli": "🌱", "gobhi": "🥦",
   "misal": "🌶️", "pav bhaji": "🥘", "dal dhokli": "🍲",
   "muthiya": "🌿", "dal": "🍛", "khichdi": "🍚",
   "chutney": "🥣", "raita": "🥛", "lassi": "🥤",
   "ladoo": "🟡", "barfi": "🍬", "halwa": "🍮",
-  "gulab": "🌸", "shrikhand": "🍦", "kheer": "🍮",
-  "default": "🍽️"
+  "gulab": "🌸", "shrikhand": "🍦", "mohanthal": "🍯",
+  "gajar": "🥕", "default": "🍽️"
 };
+
 function getEmoji(name) {
   const n = (name || "").toLowerCase();
   for (const [key, val] of Object.entries(emojiMap)) {
@@ -672,148 +697,59 @@ function getEmoji(name) {
   return emojiMap.default;
 }
 
-const tagMap = {
-  popular: "tag-pop", spicy: "tag-spicy", veg: "tag-veg"
-};
-function getTag(row) {
-  const t = (row[3] || row[2] || "").toLowerCase();
-  if (t.includes("popular")) return ["Popular", "tag-pop"];
-  if (t.includes("spicy")) return ["Spicy", "tag-spicy"];
-  return ["Veg", "tag-veg"];
+function showTab(id, btn) {
+  ['alldayTab','specialsTab','sweetsTab'].forEach(t => document.getElementById(t).style.display = 'none');
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).style.display = '';
+  btn.classList.add('active');
 }
 
-// Fetch using published-to-web CSV URL (most reliable, no CORS issues)
-async function fetchSheet(tabName) {
-  // Uses the "Publish to web" CSV URL — works from any browser without CORS issues
-  const url = `https://docs.google.com/spreadsheets/d/e/${PUB_ID}/pub?output=csv&sheet=${encodeURIComponent(tabName)}`;
-  console.log('Fetching:', tabName, url);
-  try {
-    const res = await fetch(url);
-    if (!res.ok) {
-      console.error('HTTP error', res.status, 'for', tabName);
-      return null;
-    }
-    const text = await res.text();
-    console.log('Got', text.length, 'chars for', tabName, '— first 100:', text.substring(0, 100));
-    return parseCSV(text);
-  } catch(e) {
-    console.error('Fetch failed for', tabName, e.message);
-    return null;
-  }
-}
-
-function parseCSV(text) {
-  const rows = [];
-  const lines = text.split('\n');
-  for (const line of lines) {
-    if (!line.trim()) continue;
-    const cols = [];
-    let cur = '', inQ = false;
-    for (let i = 0; i < line.length; i++) {
-      if (line[i] === '"' && !inQ) { inQ = true; continue; }
-      if (line[i] === '"' && inQ && line[i+1] === '"') { cur += '"'; i++; continue; }
-      if (line[i] === '"' && inQ) { inQ = false; continue; }
-      if (line[i] === ',' && !inQ) { cols.push(cur.trim()); cur = ''; }
-      else cur += line[i];
-    }
-    cols.push(cur.trim());
-    rows.push(cols);
-  }
-  return rows;
-}
-
-// Render All-Day Items
-async function loadAllDay() {
-  const rows = await fetchSheet(TABS.allDay);
+function loadAllDay() {
   const grid = document.getElementById('allday-grid');
-  const loadEl = document.getElementById('loading-all');
-  if (!rows || rows.length <= 1) {
-    if (loadEl) loadEl.innerHTML = SHEET_ID === "YOUR_SHEET_ID_HERE"
-      ? '⚠️ Add your Google Sheet ID to the HTML file to load live menu data.'
-      : '⚠️ Could not load menu data. Check browser console (F12) for details. Make sure the sheet is shared as Anyone with the link → Viewer.';
-    return;
-  }
-  if (loadEl) loadEl.remove();
-  // rows[0] is header: Item, Price, Description, Tag…
-  for (let i = 1; i < rows.length; i++) {
-    const r = rows[i];
-    if (!r[0]) continue;
-    const [tagLabel, tagClass] = getTag(r);
+  grid.innerHTML = '';
+  ALLDAY_ITEMS.forEach(r => {
+    const tagClass = r[3] === 'Popular' ? 'tag-pop' : r[3] === 'Spicy' ? 'tag-spicy' : 'tag-veg';
     const card = document.createElement('div');
     card.className = 'menu-card';
     card.innerHTML = `
       <div class="menu-card-top">
         <span class="menu-card-emoji">${getEmoji(r[0])}</span>
-        <span class="tag ${tagClass}">${tagLabel}</span>
+        <span class="tag ${tagClass}">${r[3]}</span>
       </div>
       <div class="menu-card-body">
         <div class="menu-card-name">${r[0]}</div>
-        <div class="menu-card-desc">${r[2] || ''}</div>
+        <div class="menu-card-desc">${r[2]}</div>
         <div class="menu-card-footer">
-          <span class="menu-price">${r[1] || ''}</span>
+          <span class="menu-price">${r[1]}</span>
           <a href="https://wa.me/19734491261?text=Hi! I'd like to order: ${encodeURIComponent(r[0])}" target="_blank" class="menu-add">+ Order</a>
         </div>
       </div>`;
     grid.appendChild(card);
-  }
+  });
 }
 
-// Render Daily Specials
-async function loadSpecials() {
-  const rows = await fetchSheet(TABS.specials);
+function loadSpecials() {
   const loadEl = document.getElementById('loading-msg');
   const tbl = document.getElementById('specials-table');
-  if (!rows || rows.length <= 1) {
-    if (loadEl) loadEl.innerHTML = SHEET_ID === "YOUR_SHEET_ID_HERE"
-      ? '⚠️ Add your Google Sheet ID to see live specials.'
-      : '⚠️ Could not load specials.';
-    return;
-  }
   if (loadEl) loadEl.style.display = 'none';
   tbl.style.display = 'table';
-  // Header row
-  const thead = document.getElementById('specials-head');
-  const hr = document.createElement('tr');
-  rows[0].forEach(h => {
-    const th = document.createElement('th');
-    th.textContent = h;
-    hr.appendChild(th);
-  });
-  thead.appendChild(hr);
-  // Data rows
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  document.getElementById('specials-head').innerHTML =
+    '<tr><th>Item</th><th>Price</th>' + days.map(d=>`<th>${d}</th>`).join('') + '</tr>';
   const tbody = document.getElementById('specials-body');
-  for (let i = 1; i < rows.length; i++) {
-    if (!rows[i][0]) continue;
+  tbody.innerHTML = '';
+  SPECIALS_ITEMS.forEach(r => {
     const tr = document.createElement('tr');
-    rows[i].forEach((cell, ci) => {
-      const td = document.createElement('td');
-      const low = cell.toLowerCase();
-      if (ci >= 2 && (low === 'yes' || low === 'y' || low === '✓' || low === 'x' || low === '1')) {
-        td.innerHTML = '<span class="avail-dot"></span>';
-      } else {
-        td.textContent = cell;
-      }
-      tr.appendChild(td);
-    });
+    tr.innerHTML = `<td><strong>${r[0]}</strong></td><td>${r[1]}</td>` +
+      r.slice(2).map(v => `<td>${v ? '<span class="avail-dot"></span>' : ''}</td>`).join('');
     tbody.appendChild(tr);
-  }
+  });
 }
 
-// Render Sweets
-async function loadSweets() {
-  const rows = await fetchSheet(TABS.sweets);
+function loadSweets() {
   const grid = document.getElementById('sweets-grid');
-  const loadEl = document.getElementById('loading-sweets');
-  if (!rows || rows.length <= 1) {
-    if (loadEl) loadEl.innerHTML = SHEET_ID === "YOUR_SHEET_ID_HERE"
-      ? '⚠️ Add your Google Sheet ID to load sweets.'
-      : '⚠️ Could not load sweets.';
-    return;
-  }
-  if (loadEl) loadEl.remove();
-  for (let i = 1; i < rows.length; i++) {
-    const r = rows[i];
-    if (!r[0]) continue;
+  grid.innerHTML = '';
+  SWEETS_ITEMS.forEach(r => {
     const card = document.createElement('div');
     card.className = 'menu-card';
     card.innerHTML = `
@@ -823,32 +759,23 @@ async function loadSweets() {
       </div>
       <div class="menu-card-body">
         <div class="menu-card-name">${r[0]}</div>
-        <div class="menu-card-desc">${r[2] || ''}</div>
+        <div class="menu-card-desc">${r[2]}</div>
         <div class="menu-card-footer">
-          <span class="menu-price">${r[1] || 'Enquire'}</span>
+          <span class="menu-price">${r[1]}</span>
           <a href="https://wa.me/19734491261?text=Hi! I'd like to enquire about: ${encodeURIComponent(r[0])}" target="_blank" class="menu-add">Enquire</a>
         </div>
       </div>`;
     grid.appendChild(card);
-  }
+  });
 }
 
-// Tab switching
-function showTab(id, btn) {
-  ['alldayTab','specialsTab','sweetsTab'].forEach(t => document.getElementById(t).style.display = 'none');
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).style.display = '';
-  btn.classList.add('active');
-}
-
-// WhatsApp order builder
 function sendOrder() {
-  const name    = document.getElementById('fname').value.trim();
-  const phone   = document.getElementById('fphone').value.trim();
-  const day     = document.getElementById('fday').value;
-  const items   = document.getElementById('fitems').value.trim();
-  const notes   = document.getElementById('fnotes').value.trim();
-  if (!name || !items) { alert('Please enter your name and what you'd like to order.'); return; }
+  const name  = document.getElementById('fname').value.trim();
+  const phone = document.getElementById('fphone').value.trim();
+  const day   = document.getElementById('fday').value;
+  const items = document.getElementById('fitems').value.trim();
+  const notes = document.getElementById('fnotes').value.trim();
+  if (!name || !items) { alert("Please enter your name and what you'd like to order."); return; }
   let msg = `Hi! I'd like to place an order 🙏\n\n*Name:* ${name}`;
   if (phone) msg += `\n*Phone:* ${phone}`;
   if (day)   msg += `\n*Pickup Day:* ${day}`;
